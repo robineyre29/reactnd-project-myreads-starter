@@ -3,14 +3,32 @@ import { Link } from 'react-router-dom'
 
 
 class ListBooks extends Component {
+constructor(props) {
+    super(props);
 
-	render() {
-console.log(this.props.books)
-	let showBooks = this.props.books
-console.log(showBooks)
+    this.state = {
+      x: props.books
+    };
+    console.log("merp")
+    console.log(this.state.x)
+}
+selectStateUpdate(book,shelf) {
+  this.props.onUpdateShelf(book, shelf)
+}
+
+
+
+
+
+render() {
+let showBooks = this.props.books
+console.log("state")
+console.log(this.props)
+console.log("I've just rendered!")
 let currentRead = showBooks.filter((book) => book.shelf === 'currentlyReading')
 let wantRead = showBooks.filter((book) => book.shelf === 'wantToRead')
 let readDone = showBooks.filter((book) => book.shelf === 'read')
+
 	return(
 		<div className="list-books">
             <div className="list-books-title">
@@ -28,12 +46,14 @@ let readDone = showBooks.filter((book) => book.shelf === 'read')
                           <div className="book-top">
                             <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: `url(${book.imageLinks.thumbnail})`}}></div>
                             <div className="book-shelf-changer">
-                              <select>
+                              <select onChange={(event) => this.selectStateUpdate(book, event.target.value)}>
+
                                 <option value="none" disabled>Move to...</option>
                                 <option value="currentlyReading">Currently Reading</option>
                                 <option value="wantToRead">Want to Read</option>
                                 <option value="read">Read</option>
                                 <option value="none">None</option>
+
                               </select>
                             </div>
                           </div>
