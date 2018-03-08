@@ -9,9 +9,10 @@ constructor(props) {
     this.state = {
       x: props.books
     };
-    console.log("merp")
+    console.log("Check if state has been set")
     console.log(this.state.x)
 }
+
 selectStateUpdate(book,shelf) {
   this.props.onUpdateShelf(book, shelf)
 }
@@ -20,11 +21,10 @@ selectStateUpdate(book,shelf) {
 
 
 
+
+
 render() {
 let showBooks = this.props.books
-console.log("state")
-console.log(this.props)
-console.log("I've just rendered!")
 let currentRead = showBooks.filter((book) => book.shelf === 'currentlyReading')
 let wantRead = showBooks.filter((book) => book.shelf === 'wantToRead')
 let readDone = showBooks.filter((book) => book.shelf === 'read')
