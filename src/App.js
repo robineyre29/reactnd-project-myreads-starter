@@ -12,16 +12,23 @@ class BooksApp extends React.Component {
   }
 
 componentDidMount() {
-  console.log("Fetching All Books from API")
   BooksAPI.getAll().then((books) => {
     this.setState({books})
   })
 }
+selectStateUpdate(book,shelf) {
+  console.log("Sel"+JSON.stringify(book)+shelf)
+  this.updateShelf(book, shelf);
 
-updateShelf = (book, shelf) => {
-  BooksAPI.update(book, shelf)
 }
-
+updateShelf = (book, shelf) => {
+  console.log("Updating shelf")
+  BooksAPI.update(book, shelf)
+  .then(() => BooksAPI.getAll())
+  .then((books) => {
+    this.setState({books})
+  })
+}
   render() 
 
   {
@@ -34,6 +41,7 @@ updateShelf = (book, shelf) => {
         <ListBooks
           books={this.state.books}
           onUpdateShelf={this.updateShelf}
+          updateSelect={this.selectStateUpdate}
 
         />
         )}/>
@@ -41,6 +49,8 @@ updateShelf = (book, shelf) => {
         <Route path='/search' render={() => (
         <SearchPage
            books={this.state.books}
+           onUpdateShelf={this.updateShelf}
+
         />
         )}/>     
         

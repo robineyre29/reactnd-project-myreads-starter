@@ -1,34 +1,19 @@
 import React, {Component} from 'react'
 import { Link } from 'react-router-dom'
-
+import Book from './Book'
 
 class ListBooks extends Component {
-constructor(props) {
-    super(props);
-
-    this.state = {
-      x: props.books
-    };
-    console.log("Check if state has been set")
-    console.log(this.state.x)
-}
-
-selectStateUpdate(book,shelf) {
-  this.props.onUpdateShelf(book, shelf)
-}
-
-
-
 
 
 
 
 render() {
+console.log("RENDERING");
 let showBooks = this.props.books
 let currentRead = showBooks.filter((book) => book.shelf === 'currentlyReading')
 let wantRead = showBooks.filter((book) => book.shelf === 'wantToRead')
 let readDone = showBooks.filter((book) => book.shelf === 'read')
-
+console.log(showBooks)
 	return(
 		<div className="list-books">
             <div className="list-books-title">
@@ -41,26 +26,13 @@ let readDone = showBooks.filter((book) => book.shelf === 'read')
                   <div className="bookshelf-books">
                     <ol className="books-grid">
                     {currentRead.map((book) => (
-            		<li key={book.id}>
-                        <div className="book">
-                          <div className="book-top">
-                            <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: `url(${book.imageLinks.thumbnail})`}}></div>
-                            <div className="book-shelf-changer">
-                              <select onChange={(event) => this.selectStateUpdate(book, event.target.value)}>
 
-                                <option value="none" disabled>Move to...</option>
-                                <option value="currentlyReading">Currently Reading</option>
-                                <option value="wantToRead">Want to Read</option>
-                                <option value="read">Read</option>
-                                <option value="none">None</option>
+                      <Book
+                        
+                        updateSelect={this.props.updateSelect}
+                        book={book}
 
-                              </select>
-                            </div>
-                          </div>
-                          <div className="book-title">{book.title}</div>
-                          <div className="book-authors">{book.authors}</div>
-                        </div>
-                      </li>
+                      />
                       ))}
 
                     </ol>
@@ -76,7 +48,7 @@ let readDone = showBooks.filter((book) => book.shelf === 'read')
                           <div className="book-top">
                             <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: `url(${book.imageLinks.thumbnail})`}}></div>
                             <div className="book-shelf-changer">
-                              <select>
+                              <select value={book.shelf} onChange={(event) => this.props.updateSelect(book, event.target.value)}>
                                 <option value="none" disabled>Move to...</option>
                                 <option value="currentlyReading">Currently Reading</option>
                                 <option value="wantToRead">Want to Read</option>
@@ -104,7 +76,7 @@ let readDone = showBooks.filter((book) => book.shelf === 'read')
                           <div className="book-top">
                             <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: `url(${book.imageLinks.thumbnail})`}}></div>
                             <div className="book-shelf-changer">
-                              <select>
+                              <select value={book.shelf} onChange={(event) => this.props.updateSelect(book, event.target.value)}>
                                 <option value="none" disabled>Move to...</option>
                                 <option value="currentlyReading">Currently Reading</option>
                                 <option value="wantToRead">Want to Read</option>
