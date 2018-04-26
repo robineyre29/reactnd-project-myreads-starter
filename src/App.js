@@ -16,7 +16,7 @@ componentDidMount() {
     this.setState({books})
   })
 }
-selectStateUpdate(book,shelf) {
+selectStateUpdate = (book,shelf) => {
   console.log("Sel"+JSON.stringify(book)+shelf)
   this.updateShelf(book, shelf);
 
