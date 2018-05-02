@@ -15,17 +15,13 @@ searchBooks = (query) => {
 	
 }
 
-selectStateUpdate(book,shelf) {
-  this.props.onUpdateShelf(book, shelf)
 
-}
 
 
 
 
 	render() {
 let booksResult = this.state.searchResult;
-console.log(booksResult);
 		return (
 				<div className="search-books">
 		            <div className="search-books-bar">

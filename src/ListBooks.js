@@ -5,12 +5,11 @@ import Book from './Book'
 class ListBooks extends Component {
 
 render() {
-console.log("RENDERING");
+console.log("IM RENDERING")
 let showBooks = this.props.books
 let currentRead = showBooks.filter((book) => book.shelf === 'currentlyReading')
 let wantRead = showBooks.filter((book) => book.shelf === 'wantToRead')
 let readDone = showBooks.filter((book) => book.shelf === 'read')
-console.log(showBooks)
 	return(
 		<div className="list-books">
             <div className="list-books-title">
