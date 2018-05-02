@@ -11,7 +11,15 @@ class SearchPage extends Component {
 searchBooks = (query) => {
 	console.log(query)
 	BooksAPI.search(query)
-	.then((res) => this.setState({searchResult: res}))
+	.then((res) => {
+		if (res !== undefined) {
+		this.setState({searchResult: res})
+			} else {
+		this.setState({searchResult: []})
+			}
+	console.log("DERP "+ this.state.searchResult)
+	})
+
 	
 }
 
@@ -44,6 +52,7 @@ let booksResult = this.state.searchResult;
 		            </div>
 		            <div className="search-books-results">
 		              <ol className="books-grid">
+		               
 		               {booksResult.map((book) => (
 		              		<Book
                         updateSelect={this.props.updateSelect}

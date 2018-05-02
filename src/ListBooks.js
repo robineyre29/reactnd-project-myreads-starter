@@ -7,6 +7,7 @@ class ListBooks extends Component {
 render() {
 console.log("IM RENDERING")
 let showBooks = this.props.books
+console.log(showBooks)
 let currentRead = showBooks.filter((book) => book.shelf === 'currentlyReading')
 let wantRead = showBooks.filter((book) => book.shelf === 'wantToRead')
 let readDone = showBooks.filter((book) => book.shelf === 'read')

@@ -26,18 +26,27 @@ updateShelf = (book, shelf) => {
   BooksAPI.update(book, shelf)
   .then(() => {
     let bookscopy = {...this.state.books};
-    console.log(bookscopy)
+    let newBook = true
     for (let i=0; this.state.books.length > i; i++) {
       if (this.state.books[i].title === book.title) {
           bookscopy[i].shelf = shelf;
           this.setState({bookscopy})
-        } else
-        this.setState({
-            books: bookscopy.concat(book)
-          })
+          newBook = false
+        } 
       }
+    if (newBook) {
+      book.shelf = shelf
+      this.setState(prevState => ({
+      books: [...prevState.books, book]
+        }))
+    }
     })
-  }
+}
+
+
+
+
+
 
 
 render() 
