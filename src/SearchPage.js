@@ -9,26 +9,20 @@ class SearchPage extends Component {
   }
 
 searchBooks = (query) => {
-	console.log(query)
 	BooksAPI.search(query)
 	.then((res) => {
-		if (res !== undefined) {
-		this.setState({searchResult: res})
-			} else {
+		if (res === undefined) {
 		this.setState({searchResult: []})
-			}
-	console.log("DERP "+ this.state.searchResult)
+		} else if (res.error === "empty query") {
+		this.setState({searchResult: []})
+		} else if (res !== undefined) {
+		this.setState({searchResult: res})
+			} 
 	})
-
-	
 }
 
 
-
-
-
-
-	render() {
+render() {
 let booksResult = this.state.searchResult;
 		return (
 				<div className="search-books">
@@ -55,6 +49,7 @@ let booksResult = this.state.searchResult;
 		               
 		               {booksResult.map((book) => (
 		              		<Book
+		              		key={book.id}
                         updateSelect={this.props.updateSelect}
                         book={book}
                         books={this.props.books}

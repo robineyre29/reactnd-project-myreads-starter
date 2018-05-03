@@ -5,9 +5,7 @@ import Book from './Book'
 class ListBooks extends Component {
 
 render() {
-console.log("IM RENDERING")
 let showBooks = this.props.books
-console.log(showBooks)
 let currentRead = showBooks.filter((book) => book.shelf === 'currentlyReading')
 let wantRead = showBooks.filter((book) => book.shelf === 'wantToRead')
 let readDone = showBooks.filter((book) => book.shelf === 'read')
@@ -24,6 +22,7 @@ let readDone = showBooks.filter((book) => book.shelf === 'read')
                     <ol className="books-grid">
                     {currentRead.map((book) => (
                       <Book
+                        key={book.id}
                         updateSelect={this.props.updateSelect}
                         book={book}
                         books={this.props.books}
@@ -38,6 +37,7 @@ let readDone = showBooks.filter((book) => book.shelf === 'read')
                     <ol className="books-grid">
                     {wantRead.map((book) => (
             		      <Book
+                        key={book.id}
                         updateSelect={this.props.updateSelect}
                         book={book}
                         books={this.props.books}
@@ -52,6 +52,7 @@ let readDone = showBooks.filter((book) => book.shelf === 'read')
                     <ol className="books-grid">
                     {readDone.map((book) => (
             		        <Book
+                        key={book.id}
                         updateSelect={this.props.updateSelect}
                         book={book}
                         books={this.props.books}

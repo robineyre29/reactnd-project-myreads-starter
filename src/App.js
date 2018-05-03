@@ -12,13 +12,11 @@ class BooksApp extends React.Component {
   }
 
 componentDidMount() {
-  console.log("MOUNTING")
   BooksAPI.getAll().then((books) => {
     this.setState({books})
     })
   }
 selectStateUpdate = (book,shelf) => {
-
   this.updateShelf(book, shelf);
 
   }
@@ -43,42 +41,25 @@ updateShelf = (book, shelf) => {
     })
 }
 
-
-
-
-
-
-
 render() 
-
   {
     return (
 
       <div className="app">
-
         <Route exact path='/' render={() => (
         <ListBooks
           books={this.state.books}
-          
           updateSelect={this.selectStateUpdate}
-
         />
         )}/>
-        
         <Route path='/search' render={() => (
         <SearchPage
            books={this.state.books}
-           
            updateSelect={this.selectStateUpdate}
-
         />
         )}/>     
-        
       </div>
-          
-    
   )}
-
 }
 
 
